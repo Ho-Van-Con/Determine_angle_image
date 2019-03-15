@@ -1,8 +1,12 @@
 import cv2 as cv
 import numpy as np
 import math
+import argparse
 
-src = cv.imread('image/example_03.jpeg',0)
+ap = argparse.ArgumentParser()
+ap.add_argument("-i", "--image", type=str,help="path to input image")
+args = vars(ap.parse_args())
+src = cv.imread(args["image"],0)
 dst = cv.bitwise_not(src)
 w, h= np.array(src.shape)
 lines = cv.HoughLinesP(dst,1,np.pi/180,100,w/2,20)
